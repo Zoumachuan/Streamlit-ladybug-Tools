@@ -13,4 +13,4 @@
 * 天空覆盖量
 ## 访问地址
 https://ymg2007-streamlit-ladybug-tools-windrose-monthly-09ycg8.streamlit.app/
-![1](https://user-images.githubusercontent.com/24608776/233089701-3e705387-be00-457e-918b-9d3b57263233.jpg)
+![1]([https://user-images.githubusercontent.com/24608776/233089701-3e705387-be00-457e-918b-9d3b57263233.jpg](https://github.com/Zoumachuan/Streamlit-ladybug-Tools/blob/main/stat.png)https://github.com/Zoumachuan/Streamlit-ladybug-Tools/blob/main/stat.png)
