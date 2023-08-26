@@ -12,5 +12,5 @@
 * 直接法线照度/散射水平照度/全球水平照度
 * 天空覆盖量
 ## 访问地址
-https://ymg2007-streamlit-ladybug-tools-windrose-monthly-09ycg8.streamlit.app/
-![1]([![stat](https://github.com/Zoumachuan/Streamlit-ladybug-Tools/assets/123653723/b6718942-e105-40f7-b460-ab378a7902f9)])
+![stat](https://github.com/Zoumachuan/Streamlit-ladybug-Tools/assets/123653723/5ca594a4-ddff-4076-9a12-5ec2291306cd)
+
