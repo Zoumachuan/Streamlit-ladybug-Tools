@@ -237,7 +237,7 @@ if temperature_type == "Passive Strategies/被动策略":
     
     # 设置图表布局
     fig.update_layout(
-        title="State Distribution/绿建策略",
+        title="Passive Strategies/被动策略",
         xaxis_title="Hour Count/占比小时数",
         yaxis_title="States/策略",
         yaxis_categoryorder="total ascending",
