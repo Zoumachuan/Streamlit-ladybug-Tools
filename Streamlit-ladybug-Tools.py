@@ -59,7 +59,7 @@ def map_temperature_to_color(temperature, min_temp, max_temp, color_scheme):
 st.header("Visualization of Climate Data and Passive Strategies Online")
 st.subheader("气象数据与被动策略在线可视化")
 
-uploaded_file = st.file_uploader("**Upload EPW file/请上传epw文件（默认是哪个地方的我也不知道，取决于上一位用户在streamlit上上传了什么epw文件）**", type="epw")
+uploaded_file = st.file_uploader("**Upload EPW file/请上传epw文件**", type="epw")
 
 if uploaded_file is not None:
     data = uploaded_file.getvalue()
