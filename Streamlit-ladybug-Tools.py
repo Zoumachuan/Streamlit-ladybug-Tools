@@ -7,6 +7,10 @@ import ladybug_charts
 import ladybug.windrose as wr
 import pandas as pd
 import math
+import zipfile
+import os
+import io
+import tempfile
 
 
 # Function to map a value between two ranges to a new range
@@ -59,16 +63,61 @@ def map_temperature_to_color(temperature, min_temp, max_temp, color_scheme):
 st.header("Visualization of Climate Data and Passive Strategies Online")
 st.subheader("气象数据与被动策略在线可视化")
 
-uploaded_file = st.file_uploader("**Upload EPW file/请上传epw文件**", type="epw")
+# 获取目录下的文件夹列表
+folder_list = os.listdir("/CHN_EPW")
 
-if uploaded_file is not None:
-    data = uploaded_file.getvalue()
-    with open("new.epw", "wb") as f:
-        f.write(data)
-    st.success("File uploaded successfully!")
+# 创建一个下拉框选择文件夹
+selected_folder = st.selectbox("Select a folder", folder_list)
 
-epw = epw_module.EPW("new.epw")
+# 获取文件夹路径
+folder_path = os.path.join("/CHN_EPW", selected_folder)
 
+# 获取文件夹内的所有文件
+file_list = os.listdir(folder_path)
+
+# 创建一个下拉框选择文件
+selected_file = st.selectbox("Select a file", file_list)
+
+# 获取文件路径
+file_path = os.path.join(folder_path, selected_file)
+
+# 检查选中的文件是否为zip格式
+if file_path.endswith(".zip"):
+    # 读取zip文件
+    with open(file_path, "rb") as zip_file:
+        # 创建一个字节流对象
+        zip_data = io.BytesIO(zip_file.read())
+
+    # 解压缩zip文件
+    with zipfile.ZipFile(zip_data, "r") as zip_ref:
+        # 获取zip文件中所有的文件
+        zip_files = zip_ref.namelist()
+
+        # 获取所有以".epw"结尾的文件
+        epw_files = [file for file in zip_files if file.endswith(".epw")]
+
+        # 创建一个下拉框选择epw文件
+        selected_epw = st.selectbox("Select an EPW file", epw_files)
+
+        # 解压缩选中的epw文件到内存中
+        epw_data = zip_ref.read(selected_epw)
+
+        # 保存解压后的epw数据到临时文件
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".epw") as temp_file:
+            temp_file.write(epw_data)
+            temp_file_path = temp_file.name
+
+        # 加载解压后的epw文件
+        epw = epw_module.EPW(temp_file_path)
+
+        # 显示成功提示信息
+        st.success("EPW file uploaded successfully!")
+else:
+    # 显示错误提示信息
+    st.error("Invalid file format. Please select a ZIP file.")
+
+
+st.subheader(epw)
 slider1 = st.slider("Start month/起始月份", 1, 12, key=1)
 i = slider1
 slider2 = st.slider("End month/终止月份", 1, 12, key=2)
